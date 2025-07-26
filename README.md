@@ -1,6 +1,9 @@
 # A simple XScreenSaver activate/deactivate icon and toggler for polybar
 
 ```
+; In your bar configuration add
+modules-right = <other-modules> xscreensaver <other-modules>
+
 [module/xscreensaver]
 type = custom/script
 
