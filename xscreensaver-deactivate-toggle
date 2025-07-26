@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+STATUS="/run/user/$(id -u)/xscreensaver-deactivate-toggle"
+
+if [ -f "$STATUS" ]; then
+  rm -f "$STATUS"
+  pkill -f xscreensaver-deactivate-daemon --signal SIGUSR1
+  notify-text.sh -q -p orange "XScreensaver" "Re-enabled XScreensaver!"
+else
+  touch "$STATUS"
+  pkill -f xscreensaver-deactivate-daemon --signal SIGUSR1
+  notify-text.sh -q -p red "XScreensaver" "Disabling XScreensaver!"
+fi

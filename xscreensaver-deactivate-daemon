@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+STATUS="/run/user/$(id -u)/xscreensaver-deactivate-toggle"
+SLEEP=${1:-60}
+
+trap 'echo "Signal SIGUSR1 received"' USR1
+
+while true; do
+  if [ -f "$STATUS" ]; then
+    xscreensaver-command -deactivate > /dev/null
+    printf "🚫\n"
+    sleep "$SLEEP" &
+    wait
+  else
+    printf "\xF0\x9F\x96\xA5\n"
+    sleep "$SLEEP" &
+    wait
+  fi
+done
